@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Awesome Single-file Website</title>
+  <meta name="description" content="Simple responsive website template — hero, features, gallery, contact." />
+  <!-- Minimal styling, mobile-first -->
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #111827;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent-2: #7c3aed;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 12px;
+      --max-width: 1100px;
+      --ff: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background:linear-gradient(180deg,#071025 0%, #071a2a 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    /* Header / Nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;font-weight:700;
+      box-shadow:0 6px 18px rgba(12,18,28,0.6);
+    }
+    nav{display:flex;gap:10px;align-items:center;}
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 12px;border-radius:9px;
+    }
+    nav a:hover{color:#fff;background:var(--glass)}
+    .cta{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      padding:8px 12px;border-radius:9px;color:#07203a;font-weight:700;
+    }
+
+    /* Hero */
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:28px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+      margin-bottom:20px;
+    }
+    .hero-inner{display:flex;flex-direction:column;gap:12px}
+    h1{margin:0;font-size:clamp(1.5rem, 2.6vw, 2.4rem)}
+    p.lead{color:var(--muted);margin:0 0 6px 0}
+    .hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+      background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.06)
+    }
+    .btn.primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#062335;border:0;
+    }
+
+    /* Features grid */
+    .grid{
+      display:grid;
+      gap:12px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      margin-bottom:20px;
+    }
+    .card{
+      background:var(--card);
+      padding:16px;border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6);
+      min-height:120px;
+    }
+    .card h3{margin:0 0 6px 0;font-size:1.05rem}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      gap:10px;
+      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      margin-bottom:20px;
+    }
+    .thumb{
+      border-radius:10px;overflow:hidden;
+      background:linear-gradient(180deg,#0b1220,#071225);
+      min-height:100px;display:flex;align-items:center;justify-content:center;
+      color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)
+    }
+
+    /* Contact form */
+    form{
+      display:grid;gap:12px;padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
+      border:1px solid rgba(255,255,255,0.03)
+    }
+    label{font-size:0.9rem}
+    input[type="text"], input[type="email"], textarea{
+      width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);
+      background:transparent;color:inherit;font-size:0.95rem;resize:vertical;
+    }
+    small.error{color:#ffb4b4}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    footer{margin-top:20px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* Utilities & responsive */
+    @media (min-width:880px){
+      .hero{
+        grid-template-columns: 1fr 380px;
+        align-items:center;
+      }
+      .hero-visual{
+        padding:18px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        display:flex;align-items:center;justify-content:center;min-height:180px;
+        border:1px solid rgba(255,255,255,0.03)
+      }
+    }
+
+    /* small touches */
+    .kbd{
+      display:inline-block;padding:6px 8px;border-radius:6px;background:rgba(0,0,0,0.25);
+      border:1px solid rgba(255,255,255,0.03);font-weight:700;font-size:0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="document">
+    <header>
+      <a class="brand" href="#" aria-label="Home">
+        <div class="logo">AR</div>
+        <div>
+          <div style="font-weight:800">Aurora</div>
+          <div style="font-size:0.85rem;color:var(--muted)">Simple. Fast. Focused.</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">Get in touch</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <h1 id="hero-title">Build faster — publish sooner.</h1>
+          <p class="lead">A minimal, responsive website template — ready to customise. Lightweight CSS, semantic HTML & small JS for form validation.</p>
+
+          <div class="hero-cta">
+            <button class="btn primary" onclick="scrollToSection('contact')">Start a project</button>
+            <button class="btn" onclick="downloadTemplate()">Download HTML</button>
+            <div style="margin-left:auto;align-self:center" class="muted">Tip: Press <span class="kbd">Ctrl/⌘+S</span> to save.</div>
+          </div>
+
+          <div style="margin-top:8px;color:var(--muted);font-size:0.92rem">
+            Quick facts:
+            <ul style="margin:6px 0 0 18px;padding:0;color:var(--muted)">
+              <li>No frameworks — pure HTML/CSS/JS</li>
+              <li>Accessible markup & responsive layout</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="hero-visual" aria-hidden="true">
+          <!-- a simple visual placeholder -->
+          <div style="text-align:center">
+            <svg width="140" height="140" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="60" height="60" rx="8" fill="url(#g)"/>
+              <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+            </svg>
+            <div style="color:var(--muted);margin-top:10px;font-weight:600">Live preview</div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features" aria-labelledby="features-title" style="margin-top:12px">
+        <h2 id="features-title" style="margin:6px 0 12px 0">Features</h2>
+        <div class="grid">
+          <div class="card" role="article">
+            <h3>Performance-first</h3>
+            <p class="muted">Small CSS footprint, no external dependencies — great for slow connections and notebooks.</p>
+          </div>
+          <div class="card" role="article">
+            <h3>Accessible</h3>
+            <p class="muted">Semantic elements, ARIA where needed, keyboard-first interactions.</p>
+          </div>
+          <div class="card" role="article">
+            <h3>Responsive</h3>
+            <p class="muted">Mobile-first grid, flexible components, scales to any device.</p>
+          </div>
+          <div class="card" role="article">
+            <h3>Easy to extend</h3>
+            <p class="muted">Plain HTML structure makes adding sections or integrating a backend straightforward.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery" aria-labelledby="gallery-title" style="margin-top:6px">
+        <h2 id="gallery-title" style="margin:6px 0 12px 0">Gallery</h2>
+        <div class="gallery" aria-hidden="false">
+          <div class="thumb">Image 1</div>
+          <div class="thumb">Image 2</div>
+          <div class="thumb">Image 3</div>
+          <div class="thumb">Image 4</div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" aria-labelledby="contact-title" style="margin-top:6px">
+        <h2 id="contact-title" style="margin:6px 0 12px 0">Contact</h2>
+        <form id="contactForm" novalidate>
+          <div class="row">
+            <div style="flex:1;min-width:160px">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+              <small class="error" id="err-name" aria-live="polite"></small>
+            </div>
+
+            <div style="flex:1;min-width:180px">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              <small class="error" id="err-email" aria-live="polite"></small>
+            </div>
+          </div>
+
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            <small class="error" id="err-message" aria-live="polite"></small>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button type="submit" class="btn primary">Send message</button>
+            <button type="button" class="btn" onclick="resetForm()">Reset</button>
+            <div style="margin-left:auto;color:var(--muted);font-size:0.9rem">No spam. Ever.</div>
+          </div>
+          <div id="formStatus" role="status" aria-live="polite" style="color:var(--muted);font-size:0.95rem"></div>
+        </form>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Aurora · Built with plain HTML/CSS/JS — tweak it the way you want.
+      </footer>
+    </main>
+  </div>
+
+  <!-- JS: small, unobtrusive -->
+  <script>
+    // small helpers
+    function el(id){return document.getElementById(id)}
+    function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}) }
+
+    // set year
+    el('year').textContent = new Date().getFullYear();
+
+    // Form validation (client-side only)
+    const form = el('contactForm');
+    function showErr(id, msg){ el('err-'+id).textContent = msg || '' }
+    function validateEmail(email){
+      // simple RFC-lite check
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      let ok = true;
+      // name
+      const name = el('name').value.trim();
+      if(!name || name.length < 2){ showErr('name','Please enter your name (2+ chars)'); ok=false } else showErr('name','');
+      // email
+      const email = el('email').value.trim();
+      if(!validateEmail(email)){ showErr('email','Please enter a valid email'); ok=false } else showErr('email','');
+      // message
+      const msg = el('message').value.trim();
+      if(!msg || msg.length < 8){ showErr('message','Message should be 8+ characters'); ok=false } else showErr('message','');
+
+      const status = el('formStatus');
+      if(!ok){ status.textContent = 'Fix errors above and try again.'; return; }
+
+      // Simulate submit (since no backend). Replace with fetch() to your API.
+      status.textContent = 'Sending…';
+      // fake delay
+      setTimeout(() => {
+        status.textContent = 'Message sent — thanks! (This is a demo; integrate a backend to actually send.)';
+        form.reset();
+      }, 700);
+    });
+
+    function resetForm(){
+      form.reset();
+      ['name','email','message'].forEach(id => showErr(id,''));
+      el('formStatus').textContent = '';
+    }
+
+    // Offer to download the current HTML as a file (client-side)
+    function downloadTemplate(){
+      const html = '<!doctype html>\\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'template.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Keyboard shortcut: Ctrl/Cmd+S to download
+    window.addEventListener('keydown', function(e){
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's'){
+        e.preventDefault();
+        downloadTemplate();
+      }
+    });
+  </script>
+</body>
+</html>
